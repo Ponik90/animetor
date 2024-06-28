@@ -20,7 +20,7 @@ void main() {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: 'home',
+
         routes: screen,
       ),
     ),

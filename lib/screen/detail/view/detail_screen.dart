@@ -56,7 +56,7 @@ class _DetailScreenState extends State<DetailScreen>
           RotationTransition(
             turns: turnsTween!.animate(controller!),
             child: Hero(
-              tag: "planet",
+              tag: "$index",
               child: Image.network(providerR!.planetList[index].image!),
             ),
           ),

@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 );
               },
               child: Hero(
-                tag: "planet",
+                tag: "$index",
                 child: Image.network(providerR!.planetList[index].image!),
               ),
             ),
@@ -71,5 +71,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    controller!.dispose();
+    super.dispose();
   }
 }
