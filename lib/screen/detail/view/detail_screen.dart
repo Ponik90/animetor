@@ -39,36 +39,81 @@ class _DetailScreenState extends State<DetailScreen>
 
     int index = ModalRoute.of(context)!.settings.arguments as int;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Planet Detail"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              print("add");
-              providerR!.setBookMarkData(providerR!.planetList[index].image!);
-            },
-            icon: const Icon(Icons.favorite_border),
-          ),
-        ],
-      ),
-      body: Column(
+      body: Stack(
         children: [
-          RotationTransition(
-            turns: turnsTween!.animate(controller!),
-            child: Hero(
-              tag: "$index",
-              child: Image.network(providerR!.planetList[index].image!),
+          Container(
+            height: MediaQuery.sizeOf(context).height,
+            width: MediaQuery.sizeOf(context).width,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xff7538ed),
+                  Colors.greenAccent,
+                ],
+              ),
             ),
           ),
-          Text("${providerR!.planetList[index].name}"),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("${providerR!.planetList[index].distance}"),
-              Text("${providerR!.planetList[index].velocity}")
-            ],
+          Padding(
+            padding: const EdgeInsets.only(top: 30.0, left: 8, right: 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.arrow_back),
+                    ),
+                    const SizedBox(
+                      width: 50,
+                    ),
+                    const Text(
+                      "Planet Detail",
+                      style: TextStyle(
+                        fontSize: 26,
+                      ),
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () {
+                        providerR!.setBookMarkData(
+                          providerR!.planetList[index].image!,
+                          providerR!.planetList[index].name!,
+                        );
+                      },
+                      icon: const Icon(Icons.favorite_border),
+                    ),
+                  ],
+                ),
+                RotationTransition(
+                  turns: turnsTween!.animate(controller!),
+                  child: Hero(
+                    tag: "$index",
+                    child: Image.network(providerR!.planetList[index].image!),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "${providerR!.planetList[index].name}",
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                ),
+                Text("Distance:-${providerR!.planetList[index].distance}"),
+                const SizedBox(height: 10,),
+                Text("Velocity:- ${providerR!.planetList[index].velocity}"),
+                const SizedBox(height: 10,),
+                const Text("Planet Info:-"),
+                const SizedBox(height: 5,),
+                Text("${providerR!.planetList[index].description}"),
+              ],
+            ),
           ),
-          Text("${providerR!.planetList[index].description}"),
         ],
       ),
     );

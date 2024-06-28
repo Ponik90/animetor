@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 5), () {
-      Navigator.pushNamed(context, 'home');
+      Navigator.pushReplacementNamed(context, 'home');
     });
 
     controller = AnimationController(
@@ -83,7 +83,6 @@ class _SplashScreenState extends State<SplashScreen>
             child: const Text(
               "Welcome The",
               style: TextStyle(
-                color: Colors.white,
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),
@@ -94,7 +93,6 @@ class _SplashScreenState extends State<SplashScreen>
             child: const Text(
               "Planet App",
               style: TextStyle(
-                color: Colors.white,
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),
